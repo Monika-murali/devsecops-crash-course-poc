@@ -58,8 +58,17 @@ jobs:
        dockerhub-user: ${{ secrets.DOCKER_USER }}
        dockerhub-password: ${{ secrets.DOCKER_PWD }}
        command: quickview,cves
-       # only-severities: crtical,high
-       # only-fixed: 
+       only-severities: crtical,high
+       only-fixed: true
+       sarif-file: scout-report.sarif
+
+   - name: Upload Artifact
+     uses: actions/upload-artifact@v4
+     if: always()
+     with: 
+      name: Bandit report
+      path: bandit-report.json
+       
        
        
      
